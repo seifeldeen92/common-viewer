@@ -21,7 +21,7 @@
         $scope.fileList = [];
         $scope.temps = [];
 
-        $scope.base_api = 'rest';
+        $scope.base_api = 'Rest';
 
         $scope.setApiBase = function(API_Base){
             $scope.base_api = API_Base;
