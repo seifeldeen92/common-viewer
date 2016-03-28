@@ -4,6 +4,8 @@
         function ($http, $q, $window, $translate) {
 
         $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        $http.defaults.headers.common['API_BASE'] = 'rest';
+
 
         var ApiHandler = function() {
             this.inprocess = false;
@@ -29,6 +31,10 @@
             }
             return deferred.resolve(data);
         };
+
+        ApiHandler.prototype.setApiBase = function(API_BASE) {
+            $http.defaults.headers.common['API_BASE'] = API_BASE;
+        }; 
 
         ApiHandler.prototype.list = function(apiUrl, path, customDeferredHandler) {
             var self = this;
@@ -195,7 +201,7 @@
                 self.inprocess = false;
             });
             return deferred.promise;
-        };
+        };       
 
         ApiHandler.prototype.getUrl = function(apiUrl, item) {
             return apiUrl + "/" + item.tempModel.id;

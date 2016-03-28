@@ -2,8 +2,8 @@
     'use strict';
     angular.module('FileManager')
     .controller('FileManagerController', [
-        '$scope', '$rootScope', '$window', '$translate', 'fileManagerConfig', 'item', 'fileNavigator', 'apiMiddleware',
-        function($scope, $rootScope, $window, $translate, fileManagerConfig, Item, FileNavigator, ApiMiddleware) {
+        '$http','$scope', '$rootScope', '$window', '$translate', 'fileManagerConfig', 'item', 'fileNavigator', 'apiMiddleware',
+        function($http,$scope, $rootScope, $window, $translate, fileManagerConfig, Item, FileNavigator, ApiMiddleware) {
 
         var $storage = $window.localStorage;
         $scope.config = fileManagerConfig;
@@ -20,6 +20,14 @@
         $scope.viewTemplate = $storage.getItem('viewTemplate') || 'main-table.html';
         $scope.fileList = [];
         $scope.temps = [];
+
+        $scope.base_api = 'rest';
+
+        $scope.setApiBase = function(API_Base){
+            $scope.base_api = API_Base;
+            $scope.apiMiddleware.setApiBase(API_Base);
+            console.log($http.defaults.headers);
+        };
 
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
