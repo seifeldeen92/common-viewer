@@ -25,6 +25,16 @@ body {
   line-height: 100%;
 }
 
+.navbar .navbar-brand>img {
+    display: inline;
+    margin: 0 10px;
+    height: 100%;
+}
+
+.navbar-brand{
+  padding: 0px;
+}
+
 .navbar .navbar-form {
   border-bottom: none;
   border-top: none;
