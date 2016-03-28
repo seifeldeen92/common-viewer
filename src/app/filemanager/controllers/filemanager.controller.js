@@ -8,7 +8,7 @@
         var $storage = $window.localStorage;
         $scope.config = fileManagerConfig;
         $scope.reverse = false;
-        $scope.predicate = ['model.type', 'model.name'];        
+        $scope.predicate = ['model.type', 'model.name'];
         $scope.order = function(predicate) {
             $scope.reverse = ($scope.predicate[1] === predicate) ? !$scope.reverse : false;
             $scope.predicate[1] = predicate;
@@ -125,7 +125,7 @@
             if (item.isImage()) {
                 if ($scope.config.previewImagesInModal) {
                     return $scope.openImagePreview(item);
-                } 
+                }
                 return $scope.apiMiddleware.download(item, true);
             }
             if (item.isEditable()) {
@@ -271,7 +271,7 @@
             });
         };
 
-        $scope.move = function() {           
+        $scope.move = function() {
             var anyItem = $scope.singleSelection() || $scope.temps[0];
             if (anyItem && validateSamePath(anyItem)) {
                 $scope.apiMiddleware.apiHandler.error = $translate.instant('error_cannot_move_same_path');
@@ -298,13 +298,16 @@
         };
 
         $scope.createFolder = function() {
-            var item = $scope.singleSelection();
-            var name = item.tempModel.name;
+            var itemLocal = $scope.singleSelection();
+            var name = itemLocal.tempModel.name;
+            //added
+            itemLocal.tempModel.id = $scope.fileNavigator.folderId ;
+
             if (!name || $scope.fileNavigator.fileNameExists(name)) {
                 return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_invalid_filename');
             }
-            
-            $scope.apiMiddleware.createFolder(item).then(function() {
+
+            $scope.apiMiddleware.createFolder(itemLocal).then(function() {
                 $scope.fileNavigator.refresh();
                 $scope.modal('newfolder', true);
             });

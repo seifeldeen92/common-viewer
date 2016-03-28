@@ -1,6 +1,6 @@
 (function(angular) {
     'use strict';
-    angular.module('FileManager').service('apiMiddleware', ['$window', 'fileManagerConfig', 'apiHandler', 
+    angular.module('FileManager').service('apiMiddleware', ['$window', 'fileManagerConfig', 'apiHandler',
         function ($window, fileManagerConfig, ApiHandler) {
 
         var ApiMiddleware = function() {
@@ -73,22 +73,22 @@
         };
 
         ApiMiddleware.prototype.getUrl = function(item) {
-            var itemPath = this.getFilePath(item);
-            return this.apiHandler.getUrl(fileManagerConfig.downloadFileUrl, itemPath);
+            //var itemPath = this.getFilePath(item);
+            return this.apiHandler.getUrl(fileManagerConfig.downloadFileUrl, item);
         };
 
         ApiMiddleware.prototype.download = function(item, forceNewWindow) {
             //TODO: add spinner to indicate file is downloading
-            var itemPath = this.getFilePath(item);
+            //var itemPath = this.getFilePath(item);
             var toFilename = item.model.name;
 
             if (item.isFolder()) {
                 return;
             }
-            
+
             return this.apiHandler.download(
-                fileManagerConfig.downloadFileUrl, 
-                itemPath,
+                fileManagerConfig.downloadFileUrl,
+                item,
                 toFilename,
                 fileManagerConfig.downloadFilesByAjax,
                 forceNewWindow
@@ -99,11 +99,11 @@
             var items = this.getFileList(files);
             var timestamp = new Date().getTime().toString().substr(8, 13);
             var toFilename = timestamp + '-' + fileManagerConfig.multipleDownloadFileName;
-            
+
             return this.apiHandler.downloadMultiple(
-                fileManagerConfig.downloadMultipleUrl, 
-                items, 
-                toFilename, 
+                fileManagerConfig.downloadMultipleUrl,
+                items,
+                toFilename,
                 fileManagerConfig.downloadFilesByAjax,
                 forceNewWindow
             );
@@ -129,8 +129,8 @@
         };
 
         ApiMiddleware.prototype.createFolder = function(item) {
-            var path = item.tempModel.fullPath();
-            return this.apiHandler.createFolder(fileManagerConfig.createFolderUrl, path);
+            //var path = item.tempModel.fullPath();
+            return this.apiHandler.createFolder(fileManagerConfig.createFolderUrl, item);
         };
 
         return ApiMiddleware;

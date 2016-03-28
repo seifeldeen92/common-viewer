@@ -4,6 +4,7 @@
 
         var Item = function(model, path) {
             var rawModel = {
+                id : model && model.id || '',
                 name: model && model.name || '',
                 path: path || [],
                 type: model && model.type || 'file',

@@ -1,6 +1,6 @@
 (function(angular, $) {
     'use strict';
-    angular.module('FileManager').service('apiHandler', ['$http', '$q', '$window', '$translate', 
+    angular.module('FileManager').service('apiHandler', ['$http', '$q', '$window', '$translate',
         function ($http, $q, $window, $translate) {
 
         $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -135,7 +135,7 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.getContent = function(apiUrl, itemPath) {            
+        ApiHandler.prototype.getContent = function(apiUrl, itemPath) {
             var self = this;
             var deferred = $q.defer();
             var data = {
@@ -197,23 +197,19 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.getUrl = function(apiUrl, path) {
-            var data = {
-                action: 'download',
-                path: path
-            };
-            return path && [apiUrl, $.param(data)].join('?');
+        ApiHandler.prototype.getUrl = function(apiUrl, item) {
+            return apiUrl + "/" + item.tempModel.id;
         };
 
-        ApiHandler.prototype.download = function(apiUrl, itemPath, toFilename, downloadByAjax, forceNewWindow) {
+        ApiHandler.prototype.download = function(apiUrl, item, toFilename, downloadByAjax, forceNewWindow) {
             var self = this;
-            var url = this.getUrl(apiUrl, itemPath);
+            var url = this.getUrl(apiUrl, item);
 
-            if (!downloadByAjax || forceNewWindow || !$window.saveAs) {
-                !$window.saveAs && $window.console.error('Your browser dont support ajax download, downloading by default');
-                return !!$window.open(url, '_blank', '');
-            }
-            
+
+            //!$window.saveAs && $window.console.error('Your browser dont support ajax download, downloading by default');
+            window.open(url, '_blank', '');
+
+
             var deferred = $q.defer();
             self.inprocess = true;
             $http.get(url).success(function(data) {
@@ -242,7 +238,7 @@
                 !$window.saveAs && $window.console.error('Your browser dont support ajax download, downloading by default');
                 return !!$window.open(url, '_blank', '');
             }
-            
+
             self.inprocess = true;
             $http.get(apiUrl).success(function(data) {
                 var bin = new $window.Blob([data]);
@@ -310,7 +306,7 @@
                 permsCode: permsCode,
                 recursive: !!recursive
             };
-            
+
             self.inprocess = true;
             self.error = '';
             $http.post(apiUrl, data).success(function(data) {
@@ -323,12 +319,15 @@
             return deferred.promise;
         };
 
-        ApiHandler.prototype.createFolder = function(apiUrl, path) {
+        ApiHandler.prototype.createFolder = function(apiUrl, item) {
             var self = this;
             var deferred = $q.defer();
+            //console.log(item.id + " " + item.tempModel.id);
             var data = {
                 action: 'createFolder',
-                newPath: path
+                newPath: item.path,
+                name: item.tempModel.name,
+                parentFolderId: item.tempModel.id
             };
 
             self.inprocess = true;
@@ -340,7 +339,7 @@
             })['finally'](function() {
                 self.inprocess = false;
             });
-        
+
             return deferred.promise;
         };
 
