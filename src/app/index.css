@@ -89,3 +89,13 @@ section.jumbotron h1 {
             width: 100%;
             height: 100%;
           }
+
+          .pdfjs .pdfViewer .page canvas {
+              margin: 0;
+              display: block;
+              position: absolute;
+              top: 0;
+          }
+          .pdfjs .pdfViewer .page canvas.annotation{
+            z-index: 1;
+          }
