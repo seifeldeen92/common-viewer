@@ -17,7 +17,8 @@
 
         ApiMiddleware.prototype.getFileList = function(files) {
             return (files || []).map(function(file) {
-                return file && file.model.fullPath();
+                //return file && file.model.fullPath();
+                return file && file.model.id;
             });
         };
 
