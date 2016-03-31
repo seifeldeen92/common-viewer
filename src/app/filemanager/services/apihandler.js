@@ -110,6 +110,7 @@
 
             self.inprocess = true;
             self.error = '';
+            //$http.get(apiUrl+"/"+folderId) ;
             $http.post(apiUrl, data).success(function(data) {
                 self.deferredHandler(data, deferred);
             }).error(function(data) {

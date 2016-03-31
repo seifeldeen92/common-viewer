@@ -10,7 +10,7 @@
             uploadUrl: 'http://localhost:8080/api/uploadUrl',
             renameUrl: 'http://localhost:8080/api/renameUrl',
             copyUrl: 'http://localhost:8080/api/copyUrl',
-            removeUrl: 'http://localhost:8080/api/removeUrl',
+            removeUrl: 'http://localhost:8080/api/deleteFolderUrl',
             editUrl: 'http://localhost:8080/api/editUrl',
             getContentUrl: 'http://localhost:8080/api/document/content',
             createFolderUrl: 'http://localhost:8080/api/createFolderUrl',
