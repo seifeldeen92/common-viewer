@@ -1,4 +1,4 @@
-# Common Viewer (File Manager + PDF Viewer) App used [Yeoman](http://yeoman.io) generator to genrate App
+# Common Viewer (File Manager + PDF Viewer) App used [Yeoman](http://yeoman.io) generator to generate App
 
 ## Project Dependencies
 
