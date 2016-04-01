@@ -1,23 +1,25 @@
 (function(angular) {
     'use strict';
-    angular.module('FileManager').provider('fileManagerConfig', function() {
+    angular.module('FileManager')
+    .constant('SPRING_API', 'http://127.0.0.1:8080')
+    .provider('fileManagerConfig', function(SPRING_API) {
 
         var values = {
             appName: 'ECD File Manager',
             defaultLang: 'en',
 
-            listUrl: 'http://springHost:8080/api/listUrl',
-            uploadUrl: 'http://springHost:8080/api/uploadUrl',
-            renameUrl: 'http://springHost:8080/api/renameUrl',
-            copyUrl: 'http://springHost:8080/api/copyUrl',
-            removeUrl: 'http://springHost:8080/api/deleteFolderUrl',
-            editUrl: 'http://springHost:8080/api/editUrl',
-            getContentUrl: 'http://springHost:8080/api/document/content',
-            createFolderUrl: 'http://springHost:8080/api/createFolderUrl',
-            downloadFileUrl: 'http://springHost:8080/api/document/content',
-            compressUrl: 'http://springHost:8080/api/compressUrl',
-            extractUrl: 'http://springHost:8080/api/extractUrl',
-            permissionsUrl: 'http://springHost:8080/api/permissionsUrl',
+            listUrl: SPRING_API + '/api/listUrl',
+            uploadUrl: SPRING_API + '/api/uploadUrl',
+            renameUrl: SPRING_API + '/api/renameUrl',
+            copyUrl: SPRING_API + '/api/copyUrl',
+            removeUrl: SPRING_API + '/api/deleteFolderUrl',
+            editUrl: SPRING_API + '/api/editUrl',
+            getContentUrl: SPRING_API + '/api/document/content',
+            createFolderUrl: SPRING_API + '/api/createFolderUrl',
+            downloadFileUrl: SPRING_API + '/api/document/content',
+            compressUrl: SPRING_API + '/api/compressUrl',
+            extractUrl: SPRING_API + '/api/extractUrl',
+            permissionsUrl: SPRING_API + '/api/permissionsUrl',
 
             searchForm: true,
             sidebar: true,
