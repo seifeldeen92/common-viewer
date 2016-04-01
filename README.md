@@ -20,7 +20,7 @@
 * Use `gulp serve` to compile and run the project in the browser
 
 ##### Note
-You have to add the IP address of your machine that is running the Spring boot (127.0.0.1 in case you are running it on the same machine with the Common Viewer). Add the IP and port by changing the constant value `SPRING_API` in the [Config.js](https://github.com/seifeldeen92/common-viewer/blob/master/src/app/filemanager/providers/config.js) file.
+Add the IP address of your machine that is running the Spring boot and port by changing the constant value `SPRING_API` in the [Config.js](https://github.com/seifeldeen92/common-viewer/blob/master/src/app/filemanager/providers/config.js) file.
 
 
 ## Troubleshoot
