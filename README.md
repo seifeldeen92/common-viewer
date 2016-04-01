@@ -1,26 +1,27 @@
-# common-viewer
+# Common Viewer (File Manager + PDF Viewer) App used [Yeoman](http://yeoman.io) generator to genrate App
 
-General Notes:-
-    Add a list of requirements ( NPM,GULP,BOWER)  
+## Project Dependencies
 
-Requirements:-
-   
-    NPM ( Node.JS)
-    GULP available
-    Bower  available
+* [NodeJS](https://nodejs.org/) is used to run the app on a server.
+* [AngularJS](https://angularjs.org/) is used as the frontend framework.
+* [Gulp](http://gulpjs.com/) jobs for development, building, emulating, running your app, compiles and concatenates Sass files, local development server with live reload.
 
-    npm install
-    bower install
-    gulp serve
------------------------------------------------ 
-1-make sure you have the documentum VM up and running
-2-make sure you have the spring boot project up and running  (adjust the properties file to the VM machine IP)
-3-open cmd "windows" /terminal on Linux/Mac OS
-4-navigate to the angular file manager folder locally (cd <filepath>)
-5-type : npm install
-6-type : bower install
-7-type : gulp serve
-8-in the hosts file on your machine add (springHost) for the IP for the machine with the spring boot running (127.0.0.1 if you are running spring locally)
-9-open localhost:<http-server port>
- 
-the file manager should be working fine.
+### Getting Started
+
+#### Backend Workflow
+
+* Run Documentum VM and copy the IP address of your VM.
+* Clone the Spring boot project `git clone git@github.com:mmohen/dctm-rest-samples.git`. After cloning the project, update the properties file with your VM IP. Check the [READme.md](https://github.com/mmohen/dctm-rest-samples/blob/master/README.md) file for detailed step by step instructions. 
+
+#### Frontend Workflow
+
+* This doc assumes you have [NodeJS](https://nodejs.org/en/download/) and `gulp` installed globally (`npm install -g gulp`).
+* Clone the project using `git clone git@github.com:seifeldeen92/common-viewer.git`. After the project is cloned navigate to the project directory and run `npm install & bower install` using `sudo` may be required.
+* Use `gulp serve` to compile and run the project in the browser
+
+##### Note
+You have to add the IP address of your machine that is running the Spring boot (127.0.0.1 in case you are running it on the same machine with the Common Viewer). Add the IP and port by changing the constant value `SPRING_API` in the [Config.js](https://github.com/seifeldeen92/common-viewer/blob/master/src/app/filemanager/providers/config.js) file.
+
+
+## Troubleshoot
+* if you get `Unable to connect github.com` while running `npm install` , `bower install` or cloning the project, this because you trying to connect through SSH, just change this connect type to HTTPS. Type this config command in the terminal `git config --global url."https://".insteadOf git://` and it problem should be fix
