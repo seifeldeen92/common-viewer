@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
     angular.module('pdfviewer')
-    .service('pdfService', ['$http', '$q', function ($http, $q) {
+    .service('pdfService', ['$http', '$q', 'SPRING_API', function ($http, $q, SPRING_API) {
         var self  = {
             'base64ToBlob': function (b64Data, contentType, sliceSize) {
                 contentType = contentType || '';
@@ -28,7 +28,7 @@
             },
             'openDocument': function(id){
                 var deferred = $q.defer();
-                $http.get('http://localhost:8080/api/document/open/' + id)
+                $http.get(SPRING_API + '/api/document/open/' + id)
                 .success(function(response){
                     var pdfContent = response.data,
                         contentType = 'data:application/pdf;base64, ',
