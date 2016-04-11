@@ -1,4 +1,67 @@
 (function() {
+  'use strict';
+
+  angular
+  .module('annotations',[])
+  .directive('annotation', function () {
+  	return {
+  		restrict: "A",
+  		link: function(scope, element, attrs){
+  			console.log(element);
+  			var newCanvas = document.createElement("canvas");
+  			newCanvas.className = 'annotation';
+  			newCanvas.id = 'annotation_' + attrs.pagenum;
+  			element[0].appendChild(newCanvas);
+  			var canvas = new fabric.Canvas(newCanvas , { width: attrs.width , height: attrs.height, selection: false });
+  			var rect, isDown, origX, origY;
+
+  			canvas.on('mouse:down', function(o){
+  				isDown = true;
+  				var pointer = canvas.getPointer(o.e);
+  				origX = pointer.x;
+  				origY = pointer.y;
+  				var pointer = canvas.getPointer(o.e);
+  				rect = new fabric.Rect({
+  					left: origX,
+  					top: origY,
+  					originX: 'left',
+  					originY: 'top',
+  					width: pointer.x-origX,
+  					height: pointer.y-origY,
+  					angle: 0,
+  					fill: 'rgba(255,255,0,0.5)',
+  					transparentCorners: false
+  				});
+  				canvas.add(rect);
+  			});
+
+  			canvas.on('mouse:move', function(o){
+  				if (!isDown) return;
+  				var pointer = canvas.getPointer(o.e);
+
+  				if(origX>pointer.x){
+  					rect.set({ left: Math.abs(pointer.x) });
+  				}
+  				if(origY>pointer.y){
+  					rect.set({ top: Math.abs(pointer.y) });
+  				}
+
+  				rect.set({ width: Math.abs(origX - pointer.x) });
+  				rect.set({ height: Math.abs(origY - pointer.y) });
+
+
+  				canvas.renderAll();
+  			});
+
+  			canvas.on('mouse:up', function(o){
+  				isDown = false;
+  			});	
+  		}
+  	};
+  });
+
+})();
+/*(function() {
   // 'use strict';
 
   angular
@@ -140,4 +203,4 @@
 		};
 	});
 
-})();
+})();*/
