@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('pdfviewer',['pdfjsViewer'])
+    .module('pdfviewer',['pdfjsViewer','annotations'])
     .controller('pdfViewerController', pdfViewerController);
 
   /** @ngInject */
